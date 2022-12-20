@@ -9,6 +9,6 @@ class WalletController extends Controller
 {
     public function RegistroCliente()
     {
-        
+
     }
 }
