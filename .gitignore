@@ -16,5 +16,3 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-database/migrations/2022_12_20_012520_create_clients_table.php
-app/Models/Client.php
