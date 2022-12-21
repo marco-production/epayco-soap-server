@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserToken extends Model
+class Transaction extends Model
 {
     use HasFactory;
 
@@ -15,19 +15,18 @@ class UserToken extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'token',
-        'session_id',
         'user_id',
-        'transaction_id'
+        'product_id',
+        'status',
     ];
 
     /**
-     * The users that belong to the Eticket
+     * Get the country associated with the User
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function users()
+    public function product()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(Product::class);
     }
 }

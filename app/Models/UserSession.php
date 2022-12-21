@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserToken extends Model
+class UserSession extends Model
 {
     use HasFactory;
 
@@ -15,10 +15,8 @@ class UserToken extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'token',
         'session_id',
         'user_id',
-        'transaction_id'
     ];
 
     /**
