@@ -21,7 +21,7 @@
                         <tr>
                             <td class="header" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; padding: 25px 0; text-align: center;">
                                 <a href="https://epayco.com/" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; color: #bbbfc3; font-size: 19px; font-weight: bold; text-decoration: none; text-shadow: 0 1px 0 white;">
-                                    <img src="https://cdn.document360.io/88b1b912-ebe6-4677-9cf4-27af4e66c459/Images/Setting/Logo-EPAYCO---RGB-1.png" alt="Epayco logo" style="max-width: 160px; border: none;">
+                                    <img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/sf9ulkykvz0kxsbdcwxv" alt="Epayco logo" style="width: 150px !important; border: none;">
                                 </a>
                             </td>
                         </tr>
