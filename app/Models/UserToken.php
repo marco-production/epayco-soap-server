@@ -16,18 +16,27 @@ class UserToken extends Model
      */
     protected $fillable = [
         'token',
-        'session_id',
         'user_id',
         'transaction_id'
     ];
 
     /**
-     * The users that belong to the Eticket
+     * Get the user that owns the User Token.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the transaction that owns the User Token.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
     }
 }

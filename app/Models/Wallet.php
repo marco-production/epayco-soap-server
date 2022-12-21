@@ -20,11 +20,11 @@ class Wallet extends Model
     ];
 
     /**
-     * The users that belong to the Eticket
+     * Get the user that owns the wallet.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

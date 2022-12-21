@@ -9,7 +9,6 @@ use App\Models\UserSession;
 use App\Models\Transaction;
 use App\Models\Product;
 use App\Jobs\SendToken;
-use Illuminate\Http\Request;
 
 class WalletController extends Controller
 {
@@ -17,7 +16,6 @@ class WalletController extends Controller
      * Create new client
      *
      * @param $request
-     * @return \Illuminate\Http\Response
      */
     public static function registroCliente($request)
     {
@@ -81,8 +79,11 @@ class WalletController extends Controller
         // Find wallet
         $wallet = Wallet::firstWhere('user_id', $user->id);
 
+        // Check that the value isn't negative
+        $value = $request['value'] > 0 ? $request['value'] : 0;
+
         // Update wallet
-        $newValue = $wallet->value + $request['value'];
+        $newValue = $wallet->value + $value;
         $wallet->update(['value' => $newValue]);
 
         return $newValue;
@@ -136,7 +137,6 @@ class WalletController extends Controller
      * Confirm payment
      *
      * @param array $request
-     * 
      */
     public static function confirmarPago($request)
     {
@@ -150,18 +150,25 @@ class WalletController extends Controller
         $transaction = Transaction::find($userToken->transaction_id);
         $product = Product::find($transaction->product_id);
 
-        // Deduct product price from user wallet
         $user = User::find($userToken->user_id);
-        $newBalance = $user->wallet->value - $product->price;    
 
-        $user->wallet->update([
-            'value' => $newBalance
-        ]);
+        // Check if the client have balance available for the transaction
+        if($user->wallet->value >= $product->price){
+            // Deduct product price from user wallet
+            $newBalance = $user->wallet->value - $product->price; 
+            
+            $user->wallet->update([
+                'value' => $newBalance
+            ]);
+    
+            // Update transaction status
+            $transaction->update([
+                'status' => true
+            ]);
 
-        // Update transaction status
-        $transaction->update([
-            'status' => true
-        ]);
+        } else {
+            throw new \Exception("No tienes balance suficiente."); 
+        }
     }
 
     /**
@@ -186,9 +193,6 @@ class WalletController extends Controller
         $wallet = Wallet::firstWhere('user_id', $user->id);
         
         return $wallet->value;
-
     }
-
     
-
 }

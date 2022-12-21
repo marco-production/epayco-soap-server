@@ -38,7 +38,7 @@ Route::any('/registro-cliente', function () {
         )
     );
 
-    // Response
+    // Output
     $server->wsdl->addComplexType(
         'response',
         'complexType',
@@ -75,13 +75,13 @@ Route::any('/registro-cliente', function () {
         } catch(\Exception $e) {
             return array(
                 'success' => false,
-                'cod_error' => 422,
+                'cod_error' => 400 ,
                 'message_error' => $e->getMessage()
             ); 
         }
     }
 
-    // Recibir datos
+    // Receive data
     $rawPostData = file_get_contents("php://input");
     $server->service($rawPostData);
     exit();
@@ -108,7 +108,7 @@ Route::any('/recargar-billetera', function () {
         )
     );
 
-    // Response
+    // Output
     $server->wsdl->addComplexType(
         'response',
         'complexType',
@@ -152,7 +152,7 @@ Route::any('/recargar-billetera', function () {
 
     }
 
-    // Recibir datos
+    // Receive data
     $rawPostData = file_get_contents("php://input");
     $server->service($rawPostData);
     exit();
@@ -178,7 +178,7 @@ Route::any('/consultar-saldo', function () {
         )
     );
 
-    // Response
+    // Output
     $server->wsdl->addComplexType(
         'response',
         'complexType',
@@ -223,7 +223,7 @@ Route::any('/consultar-saldo', function () {
         
     }
 
-    // Recibir datos
+    // Receive data
     $rawPostData = file_get_contents("php://input");
     $server->service($rawPostData);
     exit();
@@ -250,7 +250,7 @@ Route::any('/pagar ', function () {
         )
     );
 
-    // Response
+    // Output
     $server->wsdl->addComplexType(
         'response',
         'complexType',
@@ -289,20 +289,17 @@ Route::any('/pagar ', function () {
         } catch(\Exception $e) {
             return array(
                 'success' => false,
-                'cod_error' => 422,
+                'cod_error' => 400 ,
                 'message_error' => $e->getMessage()
             ); 
         }
     }
 
-    // Recibir datos
+    // Receive data
     $rawPostData = file_get_contents("php://input");
     $server->service($rawPostData);
     exit();
 });
-
-
-Route::post('/confirmar', [WalletController::class, 'confirmarPago']);
 
 Route::any('/confirmar-pago ', function () {
     $server = new \nusoap_server();
@@ -312,7 +309,7 @@ Route::any('/confirmar-pago ', function () {
 
     // Input
     $server->wsdl->addComplexType(
-        'confirmarPago',
+        'confirmar',
         'complexType',
         'struct',
         'all',
@@ -323,7 +320,7 @@ Route::any('/confirmar-pago ', function () {
         )
     );
 
-    // Response
+    // Output
     $server->wsdl->addComplexType(
         'response',
         'complexType',
@@ -339,8 +336,8 @@ Route::any('/confirmar-pago ', function () {
     );
 
     $server->register(
-        'confirmacion',
-        array('name' => 'tns:confirmarPago'),
+        'confirmarPago',
+        array('name' => 'tns:confirmar'),
         array('name' => 'tns:response'),
         'WalletService',
         false,
@@ -349,7 +346,7 @@ Route::any('/confirmar-pago ', function () {
         'Confirma el pago de un producto'
     );
 
-    function confirmacion($request){
+    function confirmarPago($request){
         try {
             WalletController::confirmarPago($request);
 
@@ -360,13 +357,13 @@ Route::any('/confirmar-pago ', function () {
         } catch(\Exception $e) {
             return array(
                 'success' => false,
-                'cod_error' => 422,
+                'cod_error' => 400 ,
                 'message_error' => $e->getMessage()
             ); 
         }
     }
 
-    // Recibir datos
+    // Receive data
     $rawPostData = file_get_contents("php://input");
     $server->service($rawPostData);
     exit();

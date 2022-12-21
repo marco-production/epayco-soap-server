@@ -27,4 +27,14 @@ class Product extends Model
     protected $casts = [
         'price' => 'double',
     ];
+
+    /**
+     * Get the transactions for the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
